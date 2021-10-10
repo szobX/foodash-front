@@ -1,8 +1,7 @@
 trigger: 
   - main
   
-pool:
-  vmImage: ubuntu-latest
+pool: test-pool
 
 steps:
   - task: NodeTool@0
