@@ -1,6 +1,8 @@
 trigger: 
   - main
   
+pool: test-pool
+
 steps:
   - task: NodeTool@0
     displayName: 'Install Node.js'
