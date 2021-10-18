@@ -17,11 +17,11 @@ deploy_staging:
   only:
   - features/cicd
   script:
-    - echo $SERVICE_ACCOUNT > gcloud-service-key.json # Google Cloud service accounts
-    - gcloud auth activate-service-account --key-file gcloud-service-key.json
+    - echo $SERVICE_ACCOUNT > /tmp/gcloud-service-key.json # Google Cloud service accounts
+    - gcloud auth activate-service-account --key-file /tmp/gcloud-service-key.json
     - gcloud config set project $PROJECT_ID
     - gcloud builds submit . --config=staging-cloudbuild.yaml
 
 
 after_script:
-- rm /tmp/$CI_PIPELINE_ID.json
+- rm /tmp/gcloud-service-key.json
