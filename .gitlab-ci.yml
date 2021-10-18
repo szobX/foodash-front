@@ -14,7 +14,7 @@ deploy_staging:
   stage: deploy
   environment: Staging
   only:
-  - cicd
+  - features/cicd
   script:
   - echo $SERVICE_ACCOUNT > /tmp/$CI_PIPELINE_ID.json
   - gcloud auth activate-service-account --key-file /tmp/$CI_PIPELINE_ID.json
