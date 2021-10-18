@@ -15,7 +15,7 @@ deploy_staging:
   stage: deploy
   environment: Staging
   only:
-  - features/cicd
+  - staging
   script:
     - echo $SERVICE_ACCOUNT > /tmp/gcloud-service-key.json # Google Cloud service accounts
     - gcloud auth activate-service-account --key-file /tmp/gcloud-service-key.json
