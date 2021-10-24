@@ -9,7 +9,7 @@ deploy_production:
   - echo $SERVICE_ACCOUNT > gcloud-service-key.json # Google Cloud service accounts
   - gcloud auth activate-service-account --key-file gcloud-service-key.json
   - gcloud config set project $PROJECT_ID
-  - gcloud builds submit . --config=cloudbuild.yaml --suppress-logs
+  - gcloud builds submit . --config=cloudbuild.yaml --gcs-log-dir=gs://foodash-cloudbuild-logs
 
 deploy_staging:
   stage: deploy
@@ -20,7 +20,7 @@ deploy_staging:
     - echo $SERVICE_ACCOUNT > /tmp/gcloud-service-key.json # Google Cloud service accounts
     - gcloud auth activate-service-account --key-file /tmp/gcloud-service-key.json
     - gcloud config set project $PROJECT_ID
-    - gcloud builds submit . --config=staging-cloudbuild.yaml --suppress-logs
+    - gcloud builds submit . --config=staging-cloudbuild.yaml --gcs-log-dir=gs://foodash-cloudbuild-logs
 
 
 after_script:
