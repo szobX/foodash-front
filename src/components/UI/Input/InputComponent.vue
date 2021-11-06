@@ -64,7 +64,6 @@
   import { PropType } from 'vue'
 
   type FDInputSizeType = PropType<'small |default | large'>
-
   export default {
     props: {
       nameId: {
@@ -100,7 +99,10 @@
         default: '',
       },
     },
-    setup(props) {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    setup(props: any) {
+      // @ts-ignore
+
       const {
         value: inputValue,
         errorMessage,

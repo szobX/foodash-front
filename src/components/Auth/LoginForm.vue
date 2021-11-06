@@ -1,5 +1,5 @@
 <template>
-  <Form
+  <!-- <Form
     :validation-schema="schema"
     @submit="onSubmit"
     @invalid-submit="onInvalidSubmit"
@@ -21,41 +21,41 @@
     />
 
     <FDButton type="primary">Submit</FDButton>
-  </Form>
+  </Form> -->
+  <div>test</div>
 </template>
 
 <script lang="ts">
-  import { Form } from 'vee-validate'
-  import FDInput from '@/components/UI/Input/InputComponent.vue'
-  import FDButton from '@/components/UI/Button/index.vue'
+  // import { Form } from 'vee-validate'
+  // import FDInput from '@/components/UI/Input/InputComponent.vue'
+  // import FDButton from '@/components/UI/Button/index.vue'
 
-  import * as Yup from 'yup'
+  // import * as Yup from 'yup'
   export default {
     name: 'LoginFOrm',
-    components: { Form, FDInput, FDButton },
+    // components: { Form, FDInput, FDButton },
     setup() {
-      function onSubmit(values) {
-        alert(JSON.stringify(values, null, 2))
-      }
-
-      function onInvalidSubmit() {
-        const submitBtn = document.querySelector('.submit-btn')
-        submitBtn.classList.add('invalid')
-        setTimeout(() => {
-          submitBtn.classList.remove('invalid')
-        }, 1000)
-      }
-      const schema = Yup.object().shape({
-        name: Yup.string().required(),
-        email: Yup.string().email().required(),
-        password: Yup.string().min(6).required(),
-        confirm_password: Yup.string()
-          .required()
-          .oneOf([Yup.ref('password')], 'Passwords do not match'),
-      })
-      return {
-        schema,
-      }
+      // function onSubmit(values) {
+      //   alert(JSON.stringify(values, null, 2))
+      // }
+      // function onInvalidSubmit() {
+      //   const submitBtn = document.querySelector('.submit-btn')
+      //   submitBtn.classList.add('invalid')
+      //   setTimeout(() => {
+      //     submitBtn.classList.remove('invalid')
+      //   }, 1000)
+      // }
+      // const schema = Yup.object().shape({
+      //   name: Yup.string().required(),
+      //   email: Yup.string().email().required(),
+      //   password: Yup.string().min(6).required(),
+      //   confirm_password: Yup.string()
+      //     .required()
+      //     .oneOf([Yup.ref('password')], 'Passwords do not match'),
+      // })
+      // return {
+      //   schema,
+      // }
     },
   }
 </script>
