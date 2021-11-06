@@ -1,5 +1,5 @@
 export type SideBarMenuItemType = {
-    id: Number
-    title: String
-    icon?: String
+  id: number
+  title: string
+  icon?: string
 }

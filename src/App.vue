@@ -1,20 +1,18 @@
 <template>
-    <Layout />
+  <Layout v-if="isAuth" />
+  <router-view v-if="!isAuth" />
 </template>
 
 <script lang="ts">
-import { ref } from 'vue'
-import Layout from '@/components/Layouts/Layout.vue'
+  import Layout from '@/components/Layouts/Layout.vue'
 
-export default {
+  export default {
     name: 'App',
     components: { Layout },
     setup() {
-        let isDark = ref<boolean>(true)
-        return {
-            isDark,
-            Layout
-        }
-    }
-}
+      return {
+        isAuth: false,
+      }
+    },
+  }
 </script>

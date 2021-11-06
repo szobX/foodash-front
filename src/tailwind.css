@@ -4,17 +4,17 @@
 
 @import 'tailwindcss/utilities';
 body {
-    font-family: 'Ubuntu';
+  font-family: 'Ubuntu';
 }
 .demo {
-    @apply border-2 rounded-sm px-16 py-12 border-gray-200;
+  @apply border-2 rounded-sm px-16 py-12 border-gray-200;
 }
 
 .demo-item {
-    @apply mb-4;
+  @apply mb-4;
 }
 
 .card {
-    background: theme('backgroundColor.white');
-    @apply shadow-md   rounded-xl;
+  background: theme('backgroundColor.white');
+  @apply shadow-md   rounded-xl;
 }
