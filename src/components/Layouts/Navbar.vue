@@ -1,5 +1,5 @@
 <template>
-  <nav class="main-navbar m-8">
+  <nav class="main-navbar my-8 mr-8">
     <div class="flex items-center card p-4">
       <div>
         <!-- <img src="resolv" alt="" /> -->
@@ -11,47 +11,35 @@
           class="
             square
             rounded-3xl
-            bg-org
-            w-8
-            h-8
+            bg-orange-lighten
+            w-12
+            h-12
             mr-2
             flex
-            align-middle
+            items-center
             justify-center
+            text-org
           "
         >
-          []
+          <BellIcon class="stroke-current text-orange w-8 h-8" />
         </div>
         <div
           class="
             square
             rounded-3xl
-            bg-org
-            w-8
-            h-8
+            bg-org-100
+            w-12
+            h-12
             mr-2
             flex
-            align-middle
+            items-center
             justify-center
+            text-orange
           "
         >
-          dz
+          <BasketIcon class="stroke-current text-orange w-8 h-8" />
         </div>
-        <div
-          class="
-            square
-            rounded-3xl
-            bg-org
-            w-8
-            h-8
-            mr-2
-            flex
-            align-middle
-            justify-center
-          "
-        >
-          Ch
-        </div>
+
         <div
           class="
             bg-blue-500
@@ -76,11 +64,13 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import BellIcon from "@ICON/bell.svg?component";
+import BasketIcon from "@ICON/transport.svg?component";
 
-export default defineComponent({
+export default {
+  components: { BellIcon, BasketIcon },
   setup() {},
-});
+};
 </script>
 
 <style>

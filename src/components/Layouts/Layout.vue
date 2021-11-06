@@ -21,7 +21,7 @@ export default {
     <Sidebar />
     <Navbar />
 
-    <div class="main flex flex-1 pt-32 mx-8">
+    <div class="main flex flex-1 flex-col pt-32 mx-8">
       <router-view />
     </div>
   </div>

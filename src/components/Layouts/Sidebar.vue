@@ -3,7 +3,7 @@
     class="static w-64 bg-white shadow-lg h-screen z-20 overflow-y-auto inset-0"
   >
     <div class="px-4 py-2 text-center">
-      <span class="text-4xl font-bold text-org">FooDASH</span>
+      <span class="text-4xl font-bold text-orange">FooDASH</span>
     </div>
     <ul>
       <MenuItem :key="item.id" v-for="item in mockMenuItems" :item="item" />

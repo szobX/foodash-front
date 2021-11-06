@@ -65,10 +65,10 @@ export default {
   border-radius: theme("borderRadius.3xl");
 }
 .sidebar-item:hover .sidebar-link {
-  background: theme("colors.org-100");
+  background: theme("colors.orange.lighten");
 }
 .sidebar-item:hover .sidebar-icon {
-  background: theme("colors.org");
+  background: theme("colors.orange.DEFAULT");
   @apply shadow-lg;
 }
 .sidebar-item:hover .sidebar-item-text {

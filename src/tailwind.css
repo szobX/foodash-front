@@ -16,5 +16,5 @@ body {
 
 .card {
   background: theme("backgroundColor.white");
-  @apply shadow-md border-2 border-gray-100 rounded-xl;
+  @apply shadow-md   rounded-xl;
 }
