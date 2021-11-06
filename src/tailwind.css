@@ -3,6 +3,9 @@
 @import 'tailwindcss/components';
 
 @import 'tailwindcss/utilities';
+* {
+  font-weight: 500;
+}
 body {
   font-family: 'Ubuntu';
 }

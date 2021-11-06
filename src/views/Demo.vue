@@ -9,33 +9,11 @@
         @submit="onSubmit"
         @invalid-submit="onInvalidSubmit"
       >
-        <span>SMALL INPUT</span>
-        <FDInput
-          name="name"
-          type="text"
-          value="inital"
-          label="Full Name"
-          size="small"
-          placeholder="Your Name"
-          success-message="Nice to meet you!"
-        />
-        <span>LARGE INPUT</span>
         <FDInput
           name="email"
           type="email"
           label="E-mail"
-          size="large"
-          placeholder="Your email address"
-          success-message="Got it, we won't spam you!"
-        />
-        <span>DEFAULT INPUT</span>
-
-        <FDInput
-          name="password"
-          type="password"
-          label="Password"
-          size="xd"
-          placeholder="Your password"
+          placeholder="E-mail"
           success-message="Nice and secure!"
         />
         <FDInput

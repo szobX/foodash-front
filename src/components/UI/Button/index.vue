@@ -1,9 +1,8 @@
 <script lang="ts">
   // import { defineComponent, computed } from 'vue';
-  import { PropType } from 'vue'
+  import { FDButtonTagType } from './FDButtonTagType'
   import { FDButtonType } from './FDButtonType'
 
-  type FDButtonTagType = PropType<'a' | 'button'>
   export default {
     name: 'FDButton',
     props: {
