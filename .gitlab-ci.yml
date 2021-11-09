@@ -41,9 +41,6 @@ sonarqube-check:
     - sonar-scanner
   allow_failure: true
   only:
-    - master 
-    - staging
-    - develop
     - merge_requests
 
 
