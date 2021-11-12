@@ -18,5 +18,7 @@ export default defineConfig({
     fs: {
       strict: false,
     },
+    port: 3001,
   },
+  envDir: './',
 })

@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@microsoft/signalr": "^5.0.11",
+    "@types/signalr": "^2.2.37",
     "@vueuse/core": "^6.3.3",
     "axios": "^0.24.0",
     "pinia": "^2.0.0-rc.9",
