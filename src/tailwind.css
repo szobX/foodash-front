@@ -3,3 +3,21 @@
 @import 'tailwindcss/components';
 
 @import 'tailwindcss/utilities';
+* {
+  font-weight: 500;
+}
+body {
+  font-family: 'Ubuntu';
+}
+.demo {
+  @apply border-2 rounded-sm px-16 py-12 border-gray-200;
+}
+
+.demo-item {
+  @apply mb-4;
+}
+
+.card {
+  background: theme('backgroundColor.white');
+  @apply shadow-md   rounded-xl;
+}
