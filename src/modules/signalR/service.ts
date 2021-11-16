@@ -1,4 +1,8 @@
-import { HubConnection, HubConnectionBuilder } from '@microsoft/signalr'
+import {
+  HubConnection,
+  HubConnectionBuilder,
+  LogLevel,
+} from '@microsoft/signalr'
 import { ISignalRConfig } from './interface.ts'
 import { HubEventToken, HubCommandToken } from './tokens'
 
@@ -17,6 +21,7 @@ export class SignalRService {
   ) {
     connectionBuilder.withUrl(this.buildUrl(options), options.withUrlOptions)
     if (options.automaticReconnect) connectionBuilder.withAutomaticReconnect()
+    if (options.logger) connectionBuilder.configureLogging(LogLevel.Information)
     this.connection = connectionBuilder.build()
     this.connection.onclose(() => this.fail())
   }

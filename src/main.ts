@@ -27,4 +27,16 @@ app.use(VueSignalR, {
     withCredentials: false,
   },
 })
+
+app.use(VueSignalR, {
+  url: import.meta.env.VITE_BACKEND_URL,
+  options: {},
+  provider: signalRProviders.ORDERS,
+  withUrlOptions: {
+    skipNegotiation: true,
+    transport: HttpTransportType.WebSockets,
+    withCredentials: false,
+  },
+})
 app.mount('#app')
+console.log(app)

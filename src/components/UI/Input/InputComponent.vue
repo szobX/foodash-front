@@ -25,7 +25,7 @@
         py-2
         px-4
         bg-white
-        border border-gray-500
+        border border-gray-300
         rounded-lg
         placeholder-gray-400
         text-gray-500
@@ -33,6 +33,8 @@
         outline-none
         focus:shadow-md
         transition
+        placeholder-font-light
+        font-weight-normal
       "
       :class="[
         {

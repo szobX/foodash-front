@@ -26,49 +26,11 @@
 </template>
 
 <script lang="ts">
-  import * as signalR from '@microsoft/signalr'
   import LoginForm from '@/components/Auth/LoginForm.vue'
-  import axios from 'axios'
+
   export default {
     name: 'AuthView',
     components: { LoginForm },
-    setup() {
-      const connection = new signalR.HubConnectionBuilder()
-        .withUrl('https://webapi-trpt76vlgq-ey.a.run.app/ws/notifications')
-        .configureLogging(signalR.LogLevel.Information)
-        .build()
-      async function test() {
-        try {
-          const res = await axios.post(
-            'https://webapi-trpt76vlgq-ey.a.run.app/api/Notification/TestNotification',
-            {
-              message: 'smacznej kawusi',
-            }
-          )
-          console.log(res)
-        } catch (e) {
-          console.log(e)
-        }
-      }
-      async function start() {
-        try {
-          await connection.start()
-          console.log('SignalR Connected.')
-        } catch (err) {
-          console.log(err)
-          setTimeout(start, 5000)
-        }
-      }
-
-      connection.onclose(async () => {
-        await start()
-      })
-
-      // Start the connection.
-      test()
-
-      start()
-    },
   }
 </script>
 

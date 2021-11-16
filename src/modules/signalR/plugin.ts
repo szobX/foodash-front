@@ -7,7 +7,6 @@ import { HubConnectionBuilder } from '@microsoft/signalr'
 export const VueSignalR = {
   install(app: App, options: ISignalRConfig) {
     const service = new SignalRService(options, new HubConnectionBuilder())
-
     app.provide(SignalRSymbol, service)
 
     service.init()
