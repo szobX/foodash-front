@@ -5,7 +5,6 @@ deploy_production:
   environment: Production
   only:
   - main
-  - 3-fix-cicd-to-use-projects-from-variable
   script:
     - gcloud auth activate-service-account --key-file $SERVICE_ACCOUNT
     - echo $PROJECT_ID
@@ -17,7 +16,6 @@ deploy_devel:
   environment: Development
   only:
   - development
-  - 3-fix-cicd-to-use-projects-from-variable
   script:
     - gcloud auth activate-service-account --key-file $SERVICE_ACCOUNT
     - gcloud builds submit --config=cloudbuild.yaml --project=$PROJECT_ID_DEV .
