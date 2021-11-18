@@ -9,7 +9,7 @@ deploy_production:
   script:
     - echo $SERVICE_ACCOUNT > /tmp/gcloud-service-key.json # Google Cloud service accounts
     - gcloud auth activate-service-account --key-file /tmp/gcloud-service-key.json
-    - gcloud builds submit . --config=cloudbuild.yaml --tag=gcr.io/$PROJECT_ID/frontend-prod --project=$PROJECT_ID
+    - gcloud builds submit --config=cloudbuild.yaml --project=$PROJECT_ID .
   after_script:
     - rm /tmp/gcloud-service-key.json
 
@@ -21,7 +21,7 @@ deploy_devel:
   script:
     - echo $SERVICE_ACCOUNT > /tmp/gcloud-service-key.json # Google Cloud service accounts
     - gcloud auth activate-service-account --key-file /tmp/gcloud-service-key.json
-    - gcloud builds submit . --config=devel-cloudbuild.yaml --tag=gcr.io/$PROJECT_ID/frontend-devel --project=$PROJECT_ID
+    - gcloud builds submit --config=devel-cloudbuild.yaml --project=$PROJECT_ID .
   after_script:
     - rm /tmp/gcloud-service-key.json
 
