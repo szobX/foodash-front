@@ -15,7 +15,7 @@ deploy_devel:
   stage: deploy
   environment: Development
   only:
-  - development
+  - develop
   script:
     - gcloud auth activate-service-account --key-file $SERVICE_ACCOUNT
     - gcloud builds submit --config=cloudbuild.yaml --project=$PROJECT_ID_DEV .
