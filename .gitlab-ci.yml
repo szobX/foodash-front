@@ -19,11 +19,12 @@ deploy_devel:
   stage: deploy
   environment: Development
   only:
-  - staging
+  - development
+  - 3-fix-cicd-to-use-projects-from-variable
   script:
     - echo $SERVICE_ACCOUNT > /tmp/gcloud-service-key.json # Google Cloud service accounts
     - gcloud auth activate-service-account --key-file /tmp/gcloud-service-key.json
-    - gcloud builds submit --config=devel-cloudbuild.yaml --project=$PROJECT_ID .
+    - gcloud builds submit --config=devel-cloudbuild.yaml --project=$PROJECT_ID_DEV .
   after_script:
     - rm /tmp/gcloud-service-key.json
 
