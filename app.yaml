@@ -1,5 +1,5 @@
 runtime: nodejs16
-service: frontend-production
+service: default
 # env: flex
 handlers:
   # Serve all static files with urls ending with a file extension

@@ -6,25 +6,19 @@ deploy_production:
   only:
     - main
   script:
-    - echo $SERVICE_ACCOUNT > /tmp/gcloud-service-key.json # Google Cloud service accounts
-    - gcloud auth activate-service-account --key-file /tmp/gcloud-service-key.json
+    - gcloud auth activate-service-account --key-file $SERVICE_ACCOUNT
+    - echo $PROJECT_ID
     - gcloud config set project $PROJECT_ID
-    - gcloud builds submit . --config=cloudbuild.yaml --gcs-log-dir=gs://foodash-cloudbuilds-logs
-  after_script:
-    - rm /tmp/gcloud-service-key.json
+    - gcloud builds submit --config=cloudbuild.yaml --project=$PROJECT_ID .
 
-deploy_staging:
+deploy_devel:
   stage: deploy
-  environment: Staging
+  environment: Development
   only:
-    - staging
+    - develop
   script:
-    - echo $SERVICE_ACCOUNT > /tmp/gcloud-service-key.json # Google Cloud service accounts
-    - gcloud auth activate-service-account --key-file /tmp/gcloud-service-key.json
-    - gcloud config set project $PROJECT_ID
-    - gcloud builds submit . --config=staging-cloudbuild.yaml --gcs-log-dir=gs://foodash-cloudbuilds-logs
-  after_script:
-    - rm /tmp/gcloud-service-key.json
+    - gcloud auth activate-service-account --key-file $SERVICE_ACCOUNT
+    - gcloud builds submit --config=cloudbuild.yaml --project=$PROJECT_ID_DEV .
 
 sonarqube-check:
   image:
