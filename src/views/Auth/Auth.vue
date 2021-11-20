@@ -1,73 +1,70 @@
 <template>
-  <div class="flex h-screen">
-    <div class="w-1/3 h-screen bg-orange p-8 flex flex-col">
-      <div class="">
-        <span class="text-white font-bold text-5xl">FooDash</span>
-      </div>
-      <div class="mt-auto">
-        <h4>Check the status</h4>
-        <p class="text-white text-xs">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero, nemo
-          assumenda debitis deserunt totam placeat veritatis ab atque eveniet
-          obcaecati fuga aperiam inventore eaque blanditiis ut reiciendis quae
-          dolore omnis.
-        </p>
-        <h5>Privacy policy @2021 Foodash Team</h5>
+  <div class="flex h-screen flex-col lg:flex-row">
+    <div
+      class="w-full lg:w-1/3 absolute lg:relative lg:bg-orange p-8 text-white"
+    >
+      <span class="text-orange lg:text-white font-bold text-5xl">FooDash</span>
+    </div>
+    <div class="w-full lg:w-2/3 h-screen bg-gray-100 flex">
+      <div class="flex flex-col my-auto lg:m-auto w-full lg:w-2/4 p-12 lg:p-0">
+        <component :is="currentComponent" />
       </div>
     </div>
-    <div class="w-2/3 h-screen bg-gray-100 flex">
-      <div class="flex flex-col m-auto">
-        <h3 class="text-orange text-2xl">Welcome!</h3>
-        <p class="text-black">Sign in by entering information below</p>
-        <LoginForm />
-      </div>
+    <div
+      class="
+        absolute
+        left-0
+        bottom-0
+        p-8
+        w-full
+        lg:w-1/3
+        text-gray-400
+        lg:text-white
+      "
+    >
+      <h4>Check the status</h4>
+      <p class="text-xs my-3">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero, nemo
+        assumenda debitis deserunt totam placeat veritatis ab atque eveniet
+        obcaecati fuga aperiam inventore eaque blanditiis ut reiciendis quae
+        dolore omnis.
+      </p>
+      <h5 class="text-center lg:text-left">
+        Privacy policy @2021 Foodash Team
+      </h5>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-  import * as signalR from '@microsoft/signalr'
   import LoginForm from '@/components/Auth/LoginForm.vue'
-  import axios from 'axios'
+  import RegisterForm from '@/components/Auth/RegisterForm.vue'
+  import ForgotPasswordForm from '@/components/Auth/ForgotPasswordForm.vue'
+  import { useRoute } from 'vue-router'
+  import { watch, computed, ref } from 'vue'
+  enum AuthNameEnum {
+    login = 'LoginForm',
+    register = 'RegisterForm',
+    'forgot-password' = 'ForgotPasswordForm',
+  }
   export default {
     name: 'AuthView',
-    components: { LoginForm },
+    components: { LoginForm, RegisterForm, ForgotPasswordForm },
     setup() {
-      const connection = new signalR.HubConnectionBuilder()
-        .withUrl('https://webapi-trpt76vlgq-ey.a.run.app/ws/notifications')
-        .configureLogging(signalR.LogLevel.Information)
-        .build()
-      async function test() {
-        try {
-          const res = await axios.post(
-            'https://webapi-trpt76vlgq-ey.a.run.app/api/Notification/TestNotification',
-            {
-              message: 'smacznej kawusi',
-            }
-          )
-          console.log(res)
-        } catch (e) {
-          console.log(e)
+      const route = useRoute()
+      const name = ref(route.params.action)
+      const component = ref()
+      component.value = AuthNameEnum[name.value as keyof typeof AuthNameEnum]
+      watch(
+        () => route.params.action,
+        (newParam, prevCount) => {
+          component.value = AuthNameEnum[newParam as keyof typeof AuthNameEnum]
         }
+      )
+      return {
+        currentComponent: component,
+        name: name,
       }
-      async function start() {
-        try {
-          await connection.start()
-          console.log('SignalR Connected.')
-        } catch (err) {
-          console.log(err)
-          setTimeout(start, 5000)
-        }
-      }
-
-      connection.onclose(async () => {
-        await start()
-      })
-
-      // Start the connection.
-      test()
-
-      start()
     },
   }
 </script>
