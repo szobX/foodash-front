@@ -1,5 +1,27 @@
-@import 'tailwindcss/base';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+* {
+  font-weight: 500;
+}
+body {
+  /* font-family: 'Ubuntu'; */
+}
+.demo {
+  @apply border-2 rounded-sm px-16 py-12 border-gray-200;
+}
 
-@import 'tailwindcss/components';
+.demo-item {
+  @apply mb-4;
+}
 
-@import 'tailwindcss/utilities';
+.card {
+  background: theme('backgroundColor.white');
+  @apply shadow-md   rounded-xl;
+}
+
+@layer base {
+  a {
+    @apply text-orange hover:text-orange-dark;
+  }
+}
