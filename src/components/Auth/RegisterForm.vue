@@ -19,27 +19,25 @@
       name="password"
       type="password"
       label="Password"
-      placeholder="Password"
+      placeholder="Type it again"
       success-message=""
     />
-    <p class="text-sm mb-3 text-gray-500">
-      Don't remember password?
-      <router-link
-        class=""
-        :to="{ name: 'Auth', params: { action: 'forgot-password' } }"
-      >
-        reset it!</router-link
+    <FDInput
+      name-id="password"
+      name="confirm_password"
+      type="password"
+      label="Confirm Password"
+      placeholder="Type it again"
+      success-message="Matched :)"
+    />
+    <FDButton class="submit-btn">Sign me Up</FDButton>
+    <p class="text-sm mb-3 text-gray-500 text-center mt-3">
+      Already have an account?
+      <router-link :to="{ name: 'Auth', params: { action: 'login' } }"
+        >Sign in</router-link
       >
     </p>
-    <FDButton class="submit-btn">Sign Me In</FDButton>
   </Form>
-  <div class="h-px w-full bg-gray-200 my-3"></div>
-  <p class="text-sm mb-3 text-gray-500 text-center mt-3">
-    create account debug
-    <router-link :to="{ name: 'Auth', params: { action: 'register' } }"
-      >Go to register!</router-link
-    >
-  </p>
 </template>
 
 <script lang="ts">
@@ -47,11 +45,10 @@
   import FDButton from '@/components/UI/Button/index.vue'
   import { Form } from 'vee-validate'
   import * as Yup from 'yup'
-  import { useRouter } from 'vue-router'
   export default {
+    name: 'RegisterForm',
     components: { FDInput, FDButton, Form },
     setup() {
-      const router = useRouter()
       function onSubmit(values: object) {
         alert(JSON.stringify(values, null, 2))
       }
@@ -69,6 +66,9 @@
       const schema = Yup.object().shape({
         email: Yup.string().email().required(),
         password: Yup.string().min(6).required(),
+        confirm_password: Yup.string()
+          .required()
+          .oneOf([Yup.ref('password')], 'Passwords do not match'),
       })
       return {
         schema,

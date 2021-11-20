@@ -7,31 +7,34 @@
       },
     ]"
   >
-    <!-- <div class="flex justify-content-between">
-      <label class="input__label" :for="nameId">{{ label }} </label>
-      <template v-if="forgotPassword">
+    <div class="flex justify-content-between">
+      <label
+        class="font-semiBold mb-2 text-sm font-bold text-gray-600"
+        :for="nameId"
+        >{{ label }}
+      </label>
+      <!-- <template v-if="forgotPassword">
         <a class="text--dark-pink" href="/forgot-password"> forgot passord?</a>
-      </template>
-    </div> -->
+      </template> -->
+    </div>
 
     <input
       :id="nameId"
       ref="inputUI"
       :value="inputValue"
       :type="type"
-      :placeholder="placeholder"
+      placeholder=""
       class="
         w-full
         py-2
         px-4
         bg-white
-        border border-gray-500
-        rounded-lg
+        border border-gray-200
+        rounded-md
         placeholder-gray-400
         text-gray-500
         focus:border-orange
         outline-none
-        focus:shadow-md
         transition
       "
       :class="[

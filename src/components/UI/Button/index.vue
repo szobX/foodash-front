@@ -26,7 +26,7 @@
 
 <style>
   .btn {
-    @apply border border-solid cursor-pointer transition px-4 py-2 mx-2 rounded font-medium text-sm
-  focus:outline-none bg-orange text-white;
+    @apply border border-solid cursor-pointer transition px-4 py-2 h-12 font-bold  rounded font-medium 
+  focus:outline-none bg-orange text-white w-full;
   }
 </style>
