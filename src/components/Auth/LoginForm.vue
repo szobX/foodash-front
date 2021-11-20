@@ -31,7 +31,7 @@
         reset it!</router-link
       >
     </p>
-    <FDButton class="submit-btn">Sign Me In</FDButton>
+    <FDButton class="submit-btn" h>Sign Me In</FDButton>
   </Form>
   <div class="h-px w-full bg-gray-200 my-3"></div>
   <p class="text-sm mb-3 text-gray-500 text-center mt-3">
@@ -53,7 +53,7 @@
     setup() {
       const router = useRouter()
       function onSubmit(values: object) {
-        alert(JSON.stringify(values, null, 2))
+        router.push({ name: 'Dashboard' })
       }
 
       function onInvalidSubmit() {

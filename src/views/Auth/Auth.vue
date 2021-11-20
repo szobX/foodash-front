@@ -1,16 +1,7 @@
 <template>
   <div class="flex h-screen flex-col lg:flex-row">
     <div
-      class="
-        w-full
-        lg:w-1/3
-        absolute
-        lg:relative
-        h-screen
-        lg:bg-orange
-        p-8
-        text-white
-      "
+      class="w-full lg:w-1/3 absolute lg:relative lg:bg-orange p-8 text-white"
     >
       <span class="text-orange lg:text-white font-bold text-5xl">FooDash</span>
     </div>
@@ -63,9 +54,7 @@
       const route = useRoute()
       const name = ref(route.params.action)
       const component = ref()
-      console.log(name.value)
       component.value = AuthNameEnum[name.value as keyof typeof AuthNameEnum]
-      // console.log(component.value)
       watch(
         () => route.params.action,
         (newParam, prevCount) => {

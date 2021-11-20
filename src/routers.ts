@@ -8,16 +8,19 @@ import ForgotPassword from './views/Auth/ForgotPassword.vue'
 
 /** @type {import('vue-router').RouterOptions['routes']} */
 export const routes = [
-  { path: '/', component: Demo, meta: { title: 'Home' } },
+  { path: '/', redirect: { name: 'Auth', params: { action: 'login' } } },
   {
-    path: '/about',
-    meta: { title: 'About' },
-    component: About,
+    path: '/dashboard',
+    component: Demo,
+    meta: { title: 'Home' },
+    name: 'Dashboard',
   },
+
   {
     path: '/demo',
     meta: { title: 'Demo' },
     component: Demo,
+    name: 'Demo',
   },
   {
     path: '/auth/:action',
