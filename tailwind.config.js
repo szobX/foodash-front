@@ -12,6 +12,7 @@ module.exports = {
         ...colors.orange,
         lighten: '#f2f2ee',
         DEFAULT: '#FF6F59',
+        dark: '#ff4d32',
       },
       green: {
         ...colors.green,
@@ -20,13 +21,27 @@ module.exports = {
     },
     extend: {
       fontFamily: {
-        sans: ['"Ubuntu"', ...defaultTheme.fontFamily.sans],
+        sans: ['Raleway', ...defaultTheme.fontFamily.sans],
       },
       colors: {
         current: 'currentColor',
-
         valid: colors.green[500],
         error: colors.red[500],
+        background: colors.gray['100'],
+        primary: colors.orange['DEFAULT'],
+      },
+      typography: {
+        DEFAULT: {
+          css: {
+            color: 'green',
+            a: {
+              color: 'red',
+              '&:hover': {
+                color: '#2c5282',
+              },
+            },
+          },
+        },
       },
     },
   },
