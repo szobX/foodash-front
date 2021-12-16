@@ -1,18 +1,10 @@
-import axios, { AxiosRequestConfig } from 'axios'
-import { computed, ref, watch } from 'vue'
+import { computed, ref, watch, inject } from 'vue'
 import { useRouter } from 'vue-router'
-import api from '@/modules/axios'
-// import { useAuth, AUTH_TOKEN } from './auth'
-
-// export const useApiWithAuth = (endpoint: string) => {
-// //   const { user } = useAuth()
-
-//   return useApi(endpoint, user?.value ? user.value[AUTH_TOKEN] : undefined)
-// }
+// import api from '@/modules/axios'
 
 export const useApi = (endpoint: string, access_token?: string) => {
   const router = useRouter()
-
+  const $http = inject('$http')
   const data = ref()
   const loading = ref(false)
   const error = ref()
@@ -21,7 +13,7 @@ export const useApi = (endpoint: string, access_token?: string) => {
     loading.value = true
     error.value = undefined
 
-    return api
+    return $http
       .post(endpoint, payload)
       .then((res) => (data.value = res.data))
       .catch((e) => {
@@ -49,7 +41,7 @@ export const useApi = (endpoint: string, access_token?: string) => {
           .join('&')
     }
 
-    return api
+    return $http
       .get(endpoint + queryString, config)
       .then((res) => (data.value = res.data))
       .catch((e) => {

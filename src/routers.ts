@@ -1,20 +1,20 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import About from './views/About.vue'
-import NotFound from './views/NotFound.vue'
-import Demo from './views/Demo.vue'
+import About from '@/views/About.vue'
+import NotFound from '@/views/NotFound.vue'
+import Dashboard from '@/views/Dashboard/index.vue'
 import Auth from './views/Auth/Auth.vue'
-import Register from './views/Auth/Register.vue'
-import Login from './views/Auth/Login.vue'
-import ForgotPassword from './views/Auth/ForgotPassword.vue'
+import Register from '@/views/Auth/Register.vue'
+import Login from '@/views/Auth/Login.vue'
+import ForgotPassword from '@/views/Auth/ForgotPassword.vue'
 import { useAuth } from '@/state/useAuth'
-import useToken from './composables/useToken'
+import useToken from '@/composables/useToken'
 
 /** @type {import('vue-router').RouterOptions['routes']} */
 const routes = [
   { path: '/', redirect: { name: 'Auth', params: { action: 'login' } } },
   {
     path: '/dashboard',
-    component: Demo,
+    component: Dashboard,
     meta: { title: 'Home', middleware: true },
     name: 'Dashboard',
   },
@@ -22,7 +22,7 @@ const routes = [
   {
     path: '/demo',
     meta: { title: 'Demo', middleware: true },
-    component: Demo,
+    component: Dashboard,
     name: 'Demo',
   },
   {
@@ -53,12 +53,8 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  // console.log(to, from, next)
   const { token, user, isAuth } = useAuth()
-  // const { token } = useToken
-
   if (to.matched.some((record) => record.meta.middleware)) {
-    console.log(token)
     if (token === undefined) {
       next({ name: 'Auth', params: { action: 'login' } })
     } else {
@@ -67,11 +63,6 @@ router.beforeEach((to, from, next) => {
   } else {
     next()
   }
-  // if (to.meta.middleware) {
-  //   if (isAuth) next()
-  //   else next({ name: 'Auth', params: { action: 'login' } })
-  // } else {
-  // }
 })
 
 export default router

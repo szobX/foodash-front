@@ -40,7 +40,7 @@
           .then(() => authStore.setUserData(data))
           .catch(() => {
             authStore.setIsLogged(false)
-            router.push({ name: 'Auth', params: { action: 'login' } })
+            // router.push({ name: 'Auth', params: { action: 'login' } })
           })
       })
       return {
