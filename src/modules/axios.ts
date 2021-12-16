@@ -36,7 +36,6 @@ api.interceptors.response.use(
     }
   },
   (error) => {
-    console.log(router)
     if (error.response.status) {
       switch (error.response.status) {
         case 400:

@@ -75,7 +75,6 @@
 
       function onSubmit(values: UserLogin) {
         post(values).then(() => {
-          console.log(data.value)
           authStore.setUser(data.value)
           router.push({ name: 'Dashboard' })
         })
