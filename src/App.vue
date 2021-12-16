@@ -16,6 +16,7 @@
   import { mapState } from 'pinia'
   import { useApi } from './composables/useApi'
   import { API_ENDPOINTS } from './types/api'
+  import { UserPayload } from './types/User'
 
   export default {
     name: 'App',

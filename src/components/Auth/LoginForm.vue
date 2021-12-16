@@ -1,7 +1,5 @@
 <template>
-  <h1 class="text-orange text-4xl font-semibold mb-4">
-    Welcome! {{ authStore.isAuth }}
-  </h1>
+  <h1 class="text-orange text-4xl font-semibold mb-4">Welcome!</h1>
   <p class="font-semibold">Sign in by entering information below</p>
   <Form
     :validation-schema="schema"
@@ -39,7 +37,6 @@
   </Form>
   <div class="h-px w-full bg-gray-200 my-3"></div>
   <p class="text-sm mb-3 text-gray-500 text-center mt-3">
-    create account debug
     <router-link :to="{ name: 'Auth', params: { action: 'register' } }"
       >Go to register!</router-link
     >
@@ -73,7 +70,7 @@
         errorFields,
       } = useApi(API_ENDPOINTS.LOGIN)
 
-      function onSubmit(values: UserLogin) {
+      function onSubmit(values: UserLogin): void {
         post(values).then(() => {
           authStore.setUser(data.value)
           router.push({ name: 'Dashboard' })

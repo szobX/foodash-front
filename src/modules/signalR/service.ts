@@ -3,7 +3,7 @@ import {
   HubConnectionBuilder,
   LogLevel,
 } from '@microsoft/signalr'
-import { ISignalRConfig } from './interface.ts'
+import { ISignalRConfig } from './interface'
 import { HubEventToken, HubCommandToken } from './tokens'
 
 type Action = () => void

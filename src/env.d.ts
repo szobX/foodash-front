@@ -1,10 +1,10 @@
 /// <reference types="vite/client" />
 /// <reference types="vite-svg-loader" />
-/// <reference types="vite/client" />
 
-interface ImportMetaEnv extends Readonly<Record<string, string>> {
-  readonly VITE_APP_TITLE: string
-  // more env variables...
+interface ImportMetaEnv {
+  VITE_APP_TITLE: string
+  VITE_BACKEND_URL_API: string
+  VITE_AUTH_PREFIX_APP: string
 }
 
 interface ImportMeta {

@@ -3,8 +3,8 @@ import './tailwind.css'
 import App from './App.vue'
 import router from './routers'
 import { createPinia } from 'pinia'
-import { SignalRService, VueSignalR } from '@/modules/signalR/index.ts'
-import { signalRProviders } from '@/types/signalR.ts'
+import { SignalRService, VueSignalR } from '@/modules/signalR/index'
+import { signalRProviders } from '@/types/signalR'
 import { HttpTransportType } from '@microsoft/signalr'
 import useToken from '@/composables/useToken'
 import api from '@/modules/axios'
@@ -34,5 +34,12 @@ app.use(VueSignalR, {
     withCredentials: false,
   },
 })
+interface ImportMetaEnv {
+  readonly VITE_API_TIMEOUT: number
+  readonly VITE_MOCKUP: boolean
+}
 
+interface ImportMeta {
+  readonly env: ImportMetaEnv
+}
 app.mount('#app')
