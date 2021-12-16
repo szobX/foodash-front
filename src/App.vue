@@ -38,10 +38,9 @@
       } = useApi(API_ENDPOINTS.GET_CURRENT_USER)
       onMounted(() => {
         get()
-          .then(() => authStore.setUserData(data))
+          .then(() => authStore.setUserData(data.value as UserPayload))
           .catch(() => {
             authStore.setIsLogged(false)
-            // router.push({ name: 'Auth', params: { action: 'login' } })
           })
       })
       return {

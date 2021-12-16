@@ -6,7 +6,8 @@
     "build": "vue-tsc --noEmit && vite build",
     "serve": "vite preview",
     "lint": "eslint --ext .ts,vue --ignore-path .gitignore .",
-    "format": "prettier .  --write"
+    "format": "prettier .  --write",
+    "check-ts": "vue-tsc --noEmit"
   },
   "dependencies": {
     "@microsoft/signalr": "^5.0.11",

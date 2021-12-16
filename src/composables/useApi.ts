@@ -1,3 +1,4 @@
+import { UserPayload } from '@/types/User'
 import { AxiosInstance, AxiosRequestConfig } from 'axios'
 import { computed, ref, watch, inject } from 'vue'
 import { useRouter } from 'vue-router'
