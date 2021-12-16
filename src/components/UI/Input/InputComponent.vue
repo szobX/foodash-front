@@ -36,6 +36,8 @@
         focus:border-orange
         outline-none
         transition
+        placeholder-font-light
+        font-weight-normal
       "
       :class="[
         {
