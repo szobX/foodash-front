@@ -1,34 +1,51 @@
 <template>
-  <Layout v-if="isAuth" />
-  <router-view v-if="!isAuth" />
+  <template v-if="!loading">
+    <router-view v-if="!isLogged" />
+    <Layout v-if="isLogged" />
+  </template>
+  <template v-else>
+    <div class="bg-red-500 text-yellow-300 text-4xl">LOADING</div>
+  </template>
 </template>
 
 <script lang="ts">
   import Layout from '@/components/Layouts/Layout.vue'
-  import { ref, onMounted, watch } from 'vue'
-  import { useRoute } from 'vue-router'
+  import { onMounted, toRefs } from 'vue'
+  import { useRouter } from 'vue-router'
+  import { useAuth } from './state/useAuth'
+  import { mapState } from 'pinia'
+  import { useApi } from './composables/useApi'
+  import { API_ENDPOINTS } from './types/api'
+  import { UserPayload } from './types/User'
 
   export default {
     name: 'App',
     components: { Layout },
-    setup() {
-      const route = useRoute()
-      const isAuth = ref(true)
-      watch(
-        () => route.path,
-        (newParam, prevCount) => {
-          console.log(route.path)
-          console.log(newParam.indexOf('auth'))
-          isAuth.value = Boolean(newParam.indexOf('auth'))
-        }
-      )
-      onMounted(() => {
-        console.log('mounted')
-        isAuth.value = Boolean(route.path.indexOf('auth'))
-      })
 
+    setup() {
+      const authStore = useAuth()
+      const router = useRouter()
+      const { isLogged } = toRefs(authStore)
+
+      const {
+        error,
+        loading,
+        get,
+        data,
+        errorMessage,
+        errorDetails,
+        errorFields,
+      } = useApi(API_ENDPOINTS.GET_CURRENT_USER)
+      onMounted(() => {
+        get()
+          .then(() => authStore.setUserData(data.value as UserPayload))
+          .catch(() => {
+            authStore.setIsLogged(false)
+          })
+      })
       return {
-        isAuth,
+        loading,
+        isLogged,
       }
     },
   }

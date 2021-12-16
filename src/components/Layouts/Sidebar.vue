@@ -3,7 +3,7 @@
     class="static w-64 bg-white shadow-lg h-screen z-20 overflow-y-auto inset-0"
   >
     <div class="px-4 py-2 text-center">
-      <span class="text-4xl font-bold text-orange">FooDASH</span>
+      <img src="@/assets/logo.png" lang="FooDash" />
     </div>
     <ul>
       <MenuItem v-for="item in mockMenuItems" :key="item.id" :item="item" />

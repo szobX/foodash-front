@@ -11,6 +11,7 @@
       name="email"
       type="email"
       label="E-mail"
+      value="admin@foodash.com"
       placeholder="E-mail"
       success-message="Nice and secure!"
     />
@@ -18,6 +19,7 @@
       name-id="password"
       name="password"
       type="password"
+      value="DevelopmentSuperAdminPassword"
       label="Password"
       placeholder="Password"
       success-message=""
@@ -35,7 +37,6 @@
   </Form>
   <div class="h-px w-full bg-gray-200 my-3"></div>
   <p class="text-sm mb-3 text-gray-500 text-center mt-3">
-    create account debug
     <router-link :to="{ name: 'Auth', params: { action: 'register' } }"
       >Go to register!</router-link
     >
@@ -48,12 +49,32 @@
   import { Form } from 'vee-validate'
   import * as Yup from 'yup'
   import { useRouter } from 'vue-router'
+  import { UserLogin } from '@/types/User'
+  import { useApi } from '@/composables/useApi'
+  import { API_ENDPOINTS } from '@/types/api'
+  import { useAuth } from '@/state/useAuth'
+
   export default {
     components: { FDInput, FDButton, Form },
     setup() {
       const router = useRouter()
-      function onSubmit(values: object) {
-        router.push({ name: 'Dashboard' })
+      const authStore = useAuth()
+
+      const {
+        error,
+        loading,
+        post,
+        data,
+        errorMessage,
+        errorDetails,
+        errorFields,
+      } = useApi(API_ENDPOINTS.LOGIN)
+
+      function onSubmit(values: UserLogin): void {
+        post(values).then(() => {
+          authStore.setUser(data.value)
+          router.push({ name: 'Dashboard' })
+        })
       }
 
       function onInvalidSubmit() {
@@ -74,6 +95,7 @@
         schema,
         onSubmit,
         onInvalidSubmit,
+        authStore,
       }
     },
   }

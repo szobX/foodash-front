@@ -3,14 +3,16 @@
   import { onMounted } from 'vue'
   import Sidebar from '@/components/Layouts/Sidebar.vue'
   import Navbar from '@/components/Layouts/Navbar.vue'
+  import { useAuth } from '@/state/useAuth'
+  import { useApi } from '@/composables/useApi'
+  import { API_ENDPOINTS } from '@/types/api'
+  import { useRouter } from 'vue-router'
 
   export default {
     name: 'Layout',
     components: { Preloader, Sidebar, Navbar },
     setup() {
-      onMounted(() => {
-        console.log('mounted')
-      })
+      return {}
     },
   }
 </script>
