@@ -36,6 +36,7 @@
   import FDCard from '@/components/UI/Card/Card.vue'
   import { Form } from 'vee-validate'
   import * as Yup from 'yup'
+  import axios from 'axios'
   export default {
     components: { FDInput, FDButton, FDCard, Form },
     setup() {
@@ -43,16 +44,6 @@
         alert(JSON.stringify(values, null, 2))
       }
 
-      function onInvalidSubmit() {
-        const submitBtn: HTMLButtonElement | null =
-          document.querySelector('.submit-btn')
-        if (submitBtn) {
-          submitBtn.classList.add('invalid')
-          setTimeout(() => {
-            submitBtn.classList.remove('invalid')
-          }, 1000)
-        }
-      }
       const schema = Yup.object().shape({
         name: Yup.string().required(),
         email: Yup.string().email().required(),
@@ -64,7 +55,6 @@
       return {
         schema,
         onSubmit,
-        onInvalidSubmit,
       }
     },
   }
