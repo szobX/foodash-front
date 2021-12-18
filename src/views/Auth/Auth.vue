@@ -11,16 +11,7 @@
       </div>
     </div>
     <div
-      class="
-        absolute
-        left-0
-        bottom-0
-        p-8
-        w-full
-        lg:w-1/3
-        text-gray-400
-        lg:text-white
-      "
+      class="absolute left-0 bottom-0 p-8 w-full lg:w-1/3 text-gray-400 lg:text-white"
     >
       <h4>Check the status</h4>
       <p class="text-xs my-3">
@@ -29,6 +20,7 @@
         obcaecati fuga aperiam inventore eaque blanditiis ut reiciendis quae
         dolore omnis.
       </p>
+      <LanguageSwitcher />
       <h5 class="text-center lg:text-left">
         Privacy policy @2021 Foodash Team
       </h5>
@@ -41,6 +33,7 @@
   import RegisterForm from '@/components/Auth/RegisterForm.vue'
   import ForgotPasswordForm from '@/components/Auth/ForgotPasswordForm.vue'
   import { useRoute } from 'vue-router'
+  import LanguageSwitcher from '@/components/UI/LanguageSwitcher.vue'
   import { watch, computed, ref } from 'vue'
   enum AuthNameEnum {
     login = 'LoginForm',
@@ -49,7 +42,12 @@
   }
   export default {
     name: 'AuthView',
-    components: { LoginForm, RegisterForm, ForgotPasswordForm },
+    components: {
+      LoginForm,
+      RegisterForm,
+      ForgotPasswordForm,
+      LanguageSwitcher,
+    },
     setup() {
       const route = useRoute()
       const name = ref(route.params.action)

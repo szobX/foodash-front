@@ -1,6 +1,6 @@
 <template>
   <h1 class="text-orange text-4xl font-semibold mb-4">Welcome!</h1>
-  <p class="font-semibold">Sign in by entering information below</p>
+  <p class="font-semibold">{{ t('sign-in') }}</p>
   <Form
     :validation-schema="schema"
     @submit="onSubmit"
@@ -59,7 +59,7 @@
     setup() {
       const router = useRouter()
       const authStore = useAuth()
-
+      const { t } = useI18n()
       const {
         error,
         loading,
@@ -96,6 +96,7 @@
         onSubmit,
         onInvalidSubmit,
         authStore,
+        t,
       }
     },
   }
