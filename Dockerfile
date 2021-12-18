@@ -7,5 +7,6 @@ COPY ./ App/
 WORKDIR /App
 
 RUN npm install
+RUN npm run build
 
-ENTRYPOINT [ "npm", "run", "build" ] 
+ENTRYPOINT [ "npm", "run", "dev"] 
