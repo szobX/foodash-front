@@ -150,7 +150,11 @@
     </template>
   </FDCard>
 </template>
-
+<route lang="yaml">
+meta:
+  layout: default
+  requiresAuth: true
+</route>
 <script lang="ts">
   import BasketIcon from '@ICON/transport.svg?component'
 

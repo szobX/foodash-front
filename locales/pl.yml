@@ -3,7 +3,7 @@ button:
   submit: submit
 welcome: Welcome
 not-found: Not found
-sign-in: Sign in by entering information below
+sign-in: Zaloguj się wpisując dane poniżej
 form:
   email: e-mail
   password: Password

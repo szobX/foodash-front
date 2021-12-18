@@ -58,10 +58,11 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  const { token } = useAuth()
-  if (to.matched.some((record) => record.meta.middleware)) {
-    if (token === undefined) {
-      next({ name: 'Auth', params: { action: 'login' } })
+  const { isLogged } = useAuth()
+  console.log(to, 'from')
+  if (to.matched.some((record) => record.meta.requiresAuth)) {
+    if (isLogged === false) {
+      next({ name: 'auth-action', params: { action: 'login' } })
     } else {
       next()
     }

@@ -46,7 +46,7 @@
 
       const logout = () => {
         logoutUser()
-        router.push({ name: 'Auth', params: { action: 'login' } })
+        router.push({ name: 'auth-action', params: { action: 'login' } })
       }
       return {
         user,

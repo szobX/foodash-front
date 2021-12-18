@@ -34,11 +34,11 @@
         errorFields,
       } = useApi(API_ENDPOINTS.GET_CURRENT_USER)
       onMounted(() => {
-        get()
-          .then(() => authStore.setUserData(data.value as UserPayload))
-          .catch(() => {
-            authStore.setIsLogged(false)
-          })
+        // get()
+        //   .then(() => authStore.setUserData(data.value as UserPayload))
+        //   .catch(() => {
+        //     authStore.setIsLogged(false)
+        //   })
       })
       return {
         loading,
