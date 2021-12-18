@@ -27,6 +27,10 @@
     </div>
   </div>
 </template>
+<route lang="yaml">
+meta:
+  layout: 'auth'
+</route>
 
 <script lang="ts">
   import LoginForm from '@/components/Auth/LoginForm.vue'

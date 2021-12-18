@@ -28,7 +28,7 @@
       Don't remember password?
       <router-link
         class=""
-        :to="{ name: 'Auth', params: { action: 'forgot-password' } }"
+        :to="{ name: 'auth-action', params: { action: 'forgot-password' } }"
       >
         reset it!</router-link
       >
@@ -37,7 +37,7 @@
   </Form>
   <div class="h-px w-full bg-gray-200 my-3"></div>
   <p class="text-sm mb-3 text-gray-500 text-center mt-3">
-    <router-link :to="{ name: 'Auth', params: { action: 'register' } }"
+    <router-link :to="{ name: 'auth-action', params: { action: 'register' } }"
       >Go to register!</router-link
     >
   </p>

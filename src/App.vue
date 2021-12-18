@@ -1,9 +1,6 @@
 <template>
-  <template v-if="!loading">
-    <router-view v-if="!isLogged" />
-    <Layout v-if="isLogged" />
-  </template>
-  <template v-else>
+  <router-view />
+  <template v-if="loading">
     <div class="bg-red-500 text-yellow-300 text-4xl">LOADING</div>
   </template>
 </template>

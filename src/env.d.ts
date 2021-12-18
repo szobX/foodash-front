@@ -1,5 +1,6 @@
 /// <reference types="vite/client" />
 /// <reference types="vite-svg-loader" />
+/// <reference types="vite-plugin-pages/client" />
 
 interface ImportMetaEnv {
   VITE_APP_TITLE: string

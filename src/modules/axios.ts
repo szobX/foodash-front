@@ -53,16 +53,16 @@ api.interceptors.response.use(
           //do something
           break
         case 401:
-          router.push({ name: 'Auth', params: { action: 'login' } })
+          router.push({ name: 'auth-action', params: { action: 'login' } })
           break
         case 403:
-          router.push({ name: 'Auth', params: { action: 'login' } })
+          router.push({ name: 'auth-action', params: { action: 'login' } })
           break
         case 404:
           break
         case 502:
           setTimeout(() => {
-            router.push({ name: 'Auth', params: { action: 'login' } })
+            router.push({ name: 'auth-action', params: { action: 'login' } })
           }, 1000)
       }
       return Promise.reject(error.response)

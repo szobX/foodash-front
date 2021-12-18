@@ -19,7 +19,7 @@
     <FDButton class="submit-btn">Submit</FDButton>
     <p class="text-sm mb-3 text-gray-500 mt-3">
       back to the
-      <router-link :to="{ name: 'Auth', params: { action: 'login' } }"
+      <router-link :to="{ name: 'auth-action', params: { action: 'login' } }"
         >Sign in</router-link
       >
     </p>

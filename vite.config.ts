@@ -5,6 +5,8 @@ import svgLoader from 'vite-svg-loader'
 import checker from 'vite-plugin-checker'
 import VueI18n from '@intlify/vite-plugin-vue-i18n'
 import AutoImport from 'unplugin-auto-import/vite'
+import Pages from 'vite-plugin-pages'
+import Layouts from 'vite-plugin-vue-layouts'
 
 // import eslintPlugin from 'vite-plugin-eslint'
 
@@ -22,6 +24,8 @@ export default defineConfig({
       imports: ['vue', 'vue-router', 'vue-i18n', '@vueuse/core'],
       dts: 'src/auto-imports.d.ts',
     }),
+    Pages(),
+    Layouts(),
   ],
   resolve: {
     alias: {

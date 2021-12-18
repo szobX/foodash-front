@@ -33,7 +33,7 @@
     <FDButton class="submit-btn">Sign me Up</FDButton>
     <p class="text-sm mb-3 text-gray-500 text-center mt-3">
       Already have an account?
-      <router-link :to="{ name: 'Auth', params: { action: 'login' } }"
+      <router-link :to="{ name: 'auth-action', params: { action: 'login' } }"
         >Sign in</router-link
       >
     </p>
