@@ -1,7 +1,7 @@
-import { ISignalRConfig } from './interface.ts'
+import { ISignalRConfig } from './interface'
 import { App, inject } from 'vue'
-import { SignalRService } from './service.ts'
-import { SignalRSymbol } from './symbols.ts'
+import { SignalRService } from './service'
+import { SignalRSymbol } from './symbols'
 import { HubConnectionBuilder } from '@microsoft/signalr'
 
 export const VueSignalR = {

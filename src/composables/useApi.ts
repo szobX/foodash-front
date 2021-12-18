@@ -1,10 +1,12 @@
+import { UserPayload } from '@/types/User'
+import { AxiosInstance, AxiosRequestConfig } from 'axios'
 import { computed, ref, watch, inject } from 'vue'
 import { useRouter } from 'vue-router'
 // import api from '@/modules/axios'
 
 export const useApi = (endpoint: string, access_token?: string) => {
   const router = useRouter()
-  const $http = inject('$http')
+  const $http = inject('$http') as AxiosInstance
   const data = ref()
   const loading = ref(false)
   const error = ref()
@@ -46,7 +48,6 @@ export const useApi = (endpoint: string, access_token?: string) => {
       .then((res) => (data.value = res.data))
       .catch((e) => {
         error.value = e
-
         throw e
       })
       .finally(() => (loading.value = false))
@@ -57,7 +58,7 @@ export const useApi = (endpoint: string, access_token?: string) => {
     loading.value = true
     error.value = undefined
 
-    return api
+    return $http
       .delete(endpoint)
       .then((res) => (data.value = res.data))
       .catch((e) => {

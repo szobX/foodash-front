@@ -3,4 +3,6 @@ export type ISignalRConfig = {
   disconnected?: () => void
   automaticReconnect?: boolean
   logger?: boolean
+  provider: string
+  withUrlOptions: object
 }

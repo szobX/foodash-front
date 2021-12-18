@@ -2,10 +2,12 @@ import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import { resolve } from 'path'
 import svgLoader from 'vite-svg-loader'
+import checker from 'vite-plugin-checker'
+
 // import eslintPlugin from 'vite-plugin-eslint'
 
 export default defineConfig({
-  plugins: [vue(), svgLoader()],
+  plugins: [vue(), svgLoader(), checker({ typescript: true })],
   resolve: {
     alias: {
       '@': resolve(__dirname, 'src'),
