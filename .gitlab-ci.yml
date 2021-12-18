@@ -6,9 +6,8 @@ deploy_production:
   only:
     - main
   script:
+    - echo $ENV_FILE_PROD > .env
     - gcloud auth activate-service-account --key-file $SERVICE_ACCOUNT
-    - echo $PROJECT_ID
-    - gcloud config set project $PROJECT_ID
     - gcloud builds submit --config=cloudbuild.yaml --project=$PROJECT_ID .
 
 deploy_devel:
@@ -17,6 +16,7 @@ deploy_devel:
   only:
     - develop
   script:
+    - echo $ENV_FILE_DEV > .env
     - gcloud auth activate-service-account --key-file $SERVICE_ACCOUNT
     - gcloud builds submit --config=cloudbuild.yaml --project=$PROJECT_ID_DEV .
 
