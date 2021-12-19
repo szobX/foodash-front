@@ -8,11 +8,35 @@
   import { API_ENDPOINTS } from '@/types/api'
   import { useRouter } from 'vue-router'
 
+  import { UserPayload } from '@/types/User'
+  import { useLoader } from '@/state/useLoader'
   export default {
-    name: 'Layout',
+    name: 'LayoutDashboard',
     components: { Preloader, Sidebar, Navbar },
     setup() {
-      return {}
+      const authStore = useAuth()
+      const router = useRouter()
+      const { setShow } = useLoader()
+      const loaderStore = useLoader()
+      const { isLogged } = toRefs(authStore)
+      // const { show } = toRefs(loaderStore)
+
+      const { loading, get, data } = useApi(API_ENDPOINTS.GET_CURRENT_USER)
+      onMounted(() => {
+        console.log('onmounted')
+        get()
+          .then(() => {
+            authStore.setUserData(data.value as UserPayload)
+            setShow(false)
+          })
+          .catch(() => {
+            authStore.setIsLogged(false)
+          })
+      })
+      return {
+        loading,
+        isLogged,
+      }
     },
   }
 </script>

@@ -26,13 +26,26 @@
 
 <script lang="ts">
   import LanguageSwitcher from '@/components/UI/LanguageSwitcher.vue'
-
+  import { useAuth } from '@/state/useAuth'
+  import { mapState } from 'pinia'
+  import { useApi } from '@/composables/useApi'
+  import { API_ENDPOINTS } from '@/types/api'
+  import { UserPayload } from '@/types/User'
+  import { useLoader } from '@/state/useLoader'
   export default {
     name: 'AuthLayout',
     components: {
       LanguageSwitcher,
     },
     setup() {
+      const authStore = useAuth()
+      const router = useRouter()
+      const { setShow } = useLoader()
+
+      onMounted(() => {
+        console.log('onmounted')
+        setShow(false)
+      })
       return {}
     },
   }
