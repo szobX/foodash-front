@@ -1,24 +1,15 @@
 image: google/cloud-sdk:alpine
 
-build_develop:
-  stage: build
-  environment: Develop
-  only:
-  - develop
-  script:
-    - gcloud auth activate-service-account --key-file $SERVICE_ACCOUNT
-     - chmod +x setup_env.sh
-    - ./setup_env.sh
-    - gcloud builds submit --tag gcr.io/$PROJECT_ID_DEV/dev-front --project=$PROJECT_ID_DEV .
-
 deploy_develop:
   stage: deploy
   environment: Develop
   only:
   - develop
+  - features/cicd
   script:
-    - gcloud auth activate-service-account --key-file /tmp/gcloud-service-key.json
-    - gcloud app deploy --image-url=gcr.io/$PROJECT_ID_DEV/dev-front:latest -q
+    - gcloud auth activate-service-account --key-file $SERVICE_ACCOUNT
+    - sh setup_env.sh
+    - gcloud builds submit --config=cloudbuild.yaml --project=$PROJECT_ID_DEV .
 
 
 sonarqube-check:
