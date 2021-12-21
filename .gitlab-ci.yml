@@ -25,7 +25,7 @@ develop:deploy:
   script:
     - ls -la
     - gcloud auth activate-service-account --key-file $SERVICE_ACCOUNT
-    - gsutil rsync -azvhRd ./dist/ gs://$DEV_BUCKET/
+    - gsutil rsync -Rd ./dist/ gs://$DEV_BUCKET/
 
 sonarqube-check:
   image:
