@@ -10,3 +10,14 @@ handlers:
   - url: /.*
     static_files: dist/index.html
     upload: dist/index.html
+
+manual_scaling:
+  instances: 1
+resources:
+  cpu: 1
+  memory_gb: 2
+  disk_size_gb: 5
+
+network:
+  name: foodash-dev-development-vpc
+  subnetwork_name: foodash-dev-development-vpc-subnet
