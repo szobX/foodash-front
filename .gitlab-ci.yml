@@ -1,4 +1,5 @@
 build_develop:
+  image: node:16
   stage: build
   environment: Develop
   only:
@@ -11,6 +12,7 @@ build_develop:
  
 
 deploy_develop:
+  image: google/cloud-sdk:latest
   stage: deploy
   environment: Develop
   only:
