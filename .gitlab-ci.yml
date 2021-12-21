@@ -1,4 +1,4 @@
-image: google/cloud-sdk:alpine
+image: launcher.gcr.io/google/nodejs
 
 deploy_develop:
   stage: deploy
@@ -9,8 +9,9 @@ deploy_develop:
   script:
     - gcloud auth activate-service-account --key-file $SERVICE_ACCOUNT
     - sh setup_env.sh
-    - gcloud builds submit --config=cloudbuild.yaml --project=$PROJECT_ID_DEV .
-
+    - npm install
+    - npm run build
+    - gsutil rsync -R dist/* gs://$DEV_BUCKET
 
 sonarqube-check:
   image:
