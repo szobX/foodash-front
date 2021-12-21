@@ -4,7 +4,6 @@ develop:build:
   environment: Develop
   only:
   - develop
-  - features/cicd
   script:
     - sh setup_env.sh
     - npm install
@@ -19,7 +18,6 @@ develop:deploy:
   environment: Develop
   only:
   - develop
-  - features/cicd
   dependencies:
     - develop:build
   script:
