@@ -1,4 +1,4 @@
-build_develop:
+develop:build:
   image: node:16
   stage: build
   environment: Develop
@@ -9,9 +9,11 @@ build_develop:
     - sh setup_env.sh
     - npm install
     - npm run build
- 
+  artifacts:
+    paths: 
+      - dist/
 
-deploy_develop:
+develop:deploy:
   image: google/cloud-sdk:latest
   stage: deploy
   environment: Develop
@@ -19,7 +21,7 @@ deploy_develop:
   - develop
   - features/cicd
   dependencies:
-    - build_develop
+    - develop:build
   script:
     - ls -la
     - gcloud auth activate-service-account --key-file $SERVICE_ACCOUNT
