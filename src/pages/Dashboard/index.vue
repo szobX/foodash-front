@@ -146,18 +146,22 @@
       <h2 class="text-xl font-semibold text-gray-500">Demo components</h2>
     </template>
     <template #body>
-      <h1>SSS</h1>
+      <h1><RiTruckLine class="text-5xl fill-current" /></h1>
     </template>
   </FDCard>
 </template>
-
+<route lang="yaml">
+meta:
+  layout: default
+  requiresAuth: true
+</route>
 <script lang="ts">
   import BasketIcon from '@ICON/transport.svg?component'
 
   import FDCard from '@/components/UI/Card/Card.vue'
-
+  import RiTruckLine from '~icons/ri/truck-line'
   export default {
-    components: { FDCard, BasketIcon },
+    components: { FDCard, BasketIcon, RiTruckLine },
     setup() {
       return {}
     },

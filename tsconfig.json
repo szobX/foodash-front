@@ -17,7 +17,7 @@
       "@/*": ["./src/*"],
       "FD/*": ["./src/components/UI/*"]
     },
-    "types": ["vite/client"]
+    "types": ["vite/client", "vite-plugin-vue-layouts/client"]
   },
   "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"]
 }

@@ -1,6 +1,6 @@
 <template>
   <h1 class="text-orange text-4xl font-semibold mb-4">Welcome!</h1>
-  <p class="font-semibold">Sign in by entering information below</p>
+  <p class="font-semibold">{{ t('sign-in') }}</p>
   <Form
     :validation-schema="schema"
     @submit="onSubmit"
@@ -28,7 +28,7 @@
       Don't remember password?
       <router-link
         class=""
-        :to="{ name: 'Auth', params: { action: 'forgot-password' } }"
+        :to="{ name: 'auth-action', params: { action: 'forgot-password' } }"
       >
         reset it!</router-link
       >
@@ -37,7 +37,7 @@
   </Form>
   <div class="h-px w-full bg-gray-200 my-3"></div>
   <p class="text-sm mb-3 text-gray-500 text-center mt-3">
-    <router-link :to="{ name: 'Auth', params: { action: 'register' } }"
+    <router-link :to="{ name: 'auth-action', params: { action: 'register' } }"
       >Go to register!</router-link
     >
   </p>
@@ -59,7 +59,7 @@
     setup() {
       const router = useRouter()
       const authStore = useAuth()
-
+      const { t } = useI18n()
       const {
         error,
         loading,
@@ -96,6 +96,7 @@
         onSubmit,
         onInvalidSubmit,
         authStore,
+        t,
       }
     },
   }

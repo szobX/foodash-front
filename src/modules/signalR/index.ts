@@ -2,7 +2,6 @@
 export { VueSignalR, useSignalR } from './plugin'
 export { SignalRService } from './service'
 // export  SignalRConfig  from '@/modules/signalR/config.ts';
-export { HubCommandToken, HubEventToken } from './tokens'
 export { SignalRSymbol } from './symbols'
 //@ts-ignore
 // /** @deprecated Use HubEventToken instead */
@@ -15,3 +14,8 @@ export { SignalRSymbol } from './symbols'
 export interface SignalRClientMethod<T> extends String {}
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface SignalRServerMethod<T> extends String {}
+
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
+export interface HubCommandToken<T> extends String {}
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
+export interface HubEventToken<T> extends String {}

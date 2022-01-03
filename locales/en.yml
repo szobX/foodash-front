@@ -1,0 +1,14 @@
+button:
+  signIn: Sign Me In
+  submit: submit
+welcome: Welcome
+not-found: Not found
+sign-in: Sign in by entering information below
+form:
+  email: e-mail
+  password: Password
+  reset: Don't remember password?
+  reset-btn: reset it!
+  reset-password: Reset password
+  reset-password-sub: We send to your email link with change password form
+privacy-policy: Privacy policy 2021 Foodash Team
