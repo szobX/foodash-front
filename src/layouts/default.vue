@@ -23,7 +23,6 @@
 
       const { loading, get, data } = useApi(API_ENDPOINTS.GET_CURRENT_USER)
       onMounted(() => {
-        console.log('onmounted')
         get()
           .then(() => {
             authStore.setUserData(data.value as UserPayload)

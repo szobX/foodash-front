@@ -7,7 +7,8 @@ import VueI18n from '@intlify/vite-plugin-vue-i18n'
 import AutoImport from 'unplugin-auto-import/vite'
 import Pages from 'vite-plugin-pages'
 import Layouts from 'vite-plugin-vue-layouts'
-
+import Icons from 'unplugin-icons/vite'
+// import IconsResolver from 'unplugin-icons/resolver'
 // import eslintPlugin from 'vite-plugin-eslint'
 
 export default defineConfig({
@@ -26,6 +27,7 @@ export default defineConfig({
     }),
     Pages(),
     Layouts(),
+    Icons(),
   ],
   resolve: {
     alias: {
