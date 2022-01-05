@@ -20,7 +20,7 @@ before_script:
   - docker info
   - echo $CI_REGISTRY_IMAGE:$TAG $PWD
   # login
-  - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD https://registry.foodash.xyz
+  - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY_URL
 
 after_script:
   - docker image prune -af
@@ -35,7 +35,7 @@ build_image:
       --tag $CI_REGISTRY_IMAGE:$TAG
       . 
 
-    - docker push $CI_REGISTRY_IMAGE:$TAG
+    - docker push $CI_REGISTRY_URL/foodash/frontend/$CI_REGISTRY_IMAGE:$TAG
 
 tag_latest_image:
   stage: deploy
@@ -43,8 +43,8 @@ tag_latest_image:
     GIT_STRATEGY: none
   script:
     - docker pull $CI_REGISTRY_IMAGE:$TAG
-    - docker tag $CI_REGISTRY_IMAGE:$TAG $CI_REGISTRY_IMAGE:latest
-    - docker push $CI_REGISTRY_IMAGE:latest
+    - docker tag $CI_REGISTRY_IMAGE:$TAG $CI_REGISTRY_URL/foodash/frontend/$CI_REGISTRY_IMAGE:latest
+    - docker push $CI_REGISTRY_URL/foodash/frontend/$CI_REGISTRY_IMAGE:latest
 
 # sonarqube-check:
 #   image:
