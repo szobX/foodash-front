@@ -34,7 +34,7 @@ build_image:
       docker build
       --tag $CI_REGISTRY_IMAGE:$TAG
       . 
-
+    - docker tag $CI_REGISTRY_IMAGE:$TAG $CI_REGISTRY_URL/foodash/frontend/$CI_REGISTRY_IMAGE:$TAG
     - docker push $CI_REGISTRY_URL/foodash/frontend/$CI_REGISTRY_IMAGE:$TAG
 
 tag_latest_image:
@@ -42,7 +42,6 @@ tag_latest_image:
   variables:
     GIT_STRATEGY: none
   script:
-    - docker pull $CI_REGISTRY_IMAGE:$TAG
     - docker tag $CI_REGISTRY_IMAGE:$TAG $CI_REGISTRY_URL/foodash/frontend/$CI_REGISTRY_IMAGE:latest
     - docker push $CI_REGISTRY_URL/foodash/frontend/$CI_REGISTRY_IMAGE:latest
 
