@@ -41,6 +41,8 @@ build_image:
     - docker push $CI_REGISTRY_URL/foodash/frontend/$CI_REGISTRY_IMAGE:$TAG
 
 tag_latest_image:
+  only:
+    - develop
   stage: deploy
   variables:
     GIT_STRATEGY: none
@@ -50,6 +52,8 @@ tag_latest_image:
     - docker push $CI_REGISTRY_URL/foodash/frontend/$CI_REGISTRY_IMAGE:latest
 
 update_manifest:
+  only: 
+   - develop
   stage: deploy
   variables:
     GIT_STRATEGY: none
