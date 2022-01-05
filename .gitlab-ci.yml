@@ -10,7 +10,7 @@ services:
 variables:
   DOCKER_HOST: tcp://docker:2376
   APP_NAME: dev-frontend
-  CI_REGISTRY_IMAGE: frontend/$APP_NAME
+  CI_REGISTRY_IMAGE: $APP_NAME
   CD_CHART_REPO: infrastructure
   CD_GIT_REPOSITORY: git@gitlab.foodash.xyz:/$CD_CHART_REPO.git
   CD_MANIFEST_FILE: Chart.yaml
