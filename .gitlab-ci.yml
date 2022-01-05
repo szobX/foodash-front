@@ -31,6 +31,7 @@ build_image:
   script:
     # Docker Build && Push image
     - cat Dockerfile
+    - sh setup_env.sh
     - >
       docker build
       --tag $CI_REGISTRY_IMAGE:$TAG
