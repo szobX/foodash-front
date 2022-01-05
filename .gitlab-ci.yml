@@ -57,7 +57,6 @@ update_manifest:
     - mkdir -p /root/.ssh
     - cp $SSH_CONFIG /root/.ssh/config 
     - echo "$SSH_PRIVATE_KEY" > /root/.ssh/id_rsa
-    - ssh-keyscan -H gitlab.foodash.xyz > /root/.ssh/known_hosts
     - chmod 600 /root/.ssh/id_rsa
     # Git
     - apk add --no-cache git
