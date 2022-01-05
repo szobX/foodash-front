@@ -1,6 +1,9 @@
 FROM node:lts-bullseye AS build-env
 
 WORKDIR /tmpdir
+
+COPY . .
+
 RUN npm install
 
 RUN npm run build
