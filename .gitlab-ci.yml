@@ -55,12 +55,7 @@ update_manifest:
   script:
     # Add SSH key to root
     - mkdir -p /root/.ssh
-    - >
-      echo "Host gitlab.foodash.xyz
-      Hostname ssh.gitlab.foodash.xyz
-      User git
-      Port 22
-      PreferredAuthentications publickey" > /root/.ssh/config 
+    - cp $SSH_CONFIG /root/.ssh/config 
     - echo "$SSH_PRIVATE_KEY" > /root/.ssh/id_rsa
     - ssh-keyscan -H gitlab.foodash.xyz > /root/.ssh/known_hosts
     - chmod 600 /root/.ssh/id_rsa
