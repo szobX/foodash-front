@@ -1,43 +1,57 @@
-develop:build:
-  image: node:16
+stages:
+  - build
+  - deploy
+
+variables:
+  APP_NAME: dev-frontend
+  CI_REGISTRY_IMAGE: frontend/$APP_NAME
+  CD_CHART_REPO: infrastructure
+  CD_GIT_REPOSITORY: git@gitlab.foodash.xyz:/$CD_CHART_REPO.git
+  CD_MANIFEST_FILE: Chart.yaml
+  TAG: $CI_COMMIT_REF_NAME-$CI_COMMIT_SHORT_SHA
+
+before_script:
+  - echo $CI_REGISTRY_IMAGE:$TAG $PWD
+  # login
+  - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD
+
+after_script:
+  - docker image prune -af
+
+build_image:
   stage: build
-  environment: Develop
-  only:
-  - develop
   script:
-    - sh setup_env.sh
-    - npm install
-    - npm run build
-  artifacts:
-    paths: 
-      - dist/
+    # Docker Build && Push image
+    - cat Dockerfile
+    - >
+      docker build
+      --tag $CI_REGISTRY_IMAGE:$TAG
+      . 
 
-develop:deploy:
-  image: google/cloud-sdk:latest
+    - docker push $CI_REGISTRY_IMAGE:$TAG
+
+tag_latest_image:
   stage: deploy
-  environment: Develop
-  only:
-  - develop
-  dependencies:
-    - develop:build
-  script:
-    - ls -la
-    - gcloud auth activate-service-account --key-file $SERVICE_ACCOUNT
-    - gsutil rsync -Rd ./dist/ gs://$DEV_BUCKET/
-
-sonarqube-check:
-  image:
-    name: sonarsource/sonar-scanner-cli:latest
-    entrypoint: ['']
   variables:
-    SONAR_USER_HOME: '${CI_PROJECT_DIR}/.sonar' # Defines the location of the analysis task cache
-    GIT_DEPTH: '0' # Tells git to fetch all the branches of the project, required by the analysis task
-  cache:
-    key: '${CI_JOB_NAME}'
-    paths:
-      - .sonar/cache
+    GIT_STRATEGY: none
   script:
-    - sonar-scanner
-  allow_failure: true
-  only:
-    - merge_requests
+    - docker pull $CI_REGISTRY_IMAGE:$TAG
+    - docker tag $CI_REGISTRY_IMAGE:$TAG $CI_REGISTRY_IMAGE:latest
+    - docker push $CI_REGISTRY_IMAGE:latest
+
+# sonarqube-check:
+#   image:
+#     name: sonarsource/sonar-scanner-cli:latest
+#     entrypoint: ['']
+#   variables:
+#     SONAR_USER_HOME: '${CI_PROJECT_DIR}/.sonar' # Defines the location of the analysis task cache
+#     GIT_DEPTH: '0' # Tells git to fetch all the branches of the project, required by the analysis task
+#   cache:
+#     key: '${CI_JOB_NAME}'
+#     paths:
+#       - .sonar/cache
+#   script:
+#     - sonar-scanner
+#   allow_failure: true
+#   only:
+#     - merge_requests
