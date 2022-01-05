@@ -15,6 +15,7 @@ variables:
   CD_GIT_REPOSITORY: git@gitlab.foodash.xyz:/$CD_CHART_REPO.git
   CD_MANIFEST_FILE: Chart.yaml
   TAG: $CI_COMMIT_SHORT_SHA
+  BRANCH: develop
 
 before_script:
   - docker info
@@ -54,21 +55,27 @@ update_manifest:
   script:
     # Add SSH key to root
     - mkdir -p /root/.ssh
+    - >
+      echo "Host gitlab.foodash.xyz
+      Hostname ssh.gitlab.foodash.xyz
+      User git
+      Port 22
+      PreferredAuthentications publickey" > /root/.ssh/config 
     - echo "$SSH_PRIVATE_KEY" > /root/.ssh/id_rsa
     - ssh-keyscan -H gitlab.foodash.xyz > /root/.ssh/known_hosts
     - chmod 600 /root/.ssh/id_rsa
     # Git
     - apk add --no-cache git
     - git config --global user.name $APP_NAME
-    - git config --global user.email $APP_NAME"@gitlab.com"
-    - git clone --single-branch --branch master $CD_GIT_REPOSITORY
-    - cd $CD_CHART_REPO
+    - git config --global user.email $APP_NAME"@gitlab.foodash.xyz"
+    - git clone --single-branch --branch $BRANCH $CD_GIT_REPOSITORY
+    - cd $CD_CHART_REPO/Helms/frontend
     # Helm
     - >
       docker run --rm -v ${PWD}:/workdir mikefarah/yq:3.2.1 yq write 
       --inplace --verbose $CD_MANIFEST_FILE appVersion $TAG
     - cat $CD_MANIFEST_FILE
-    - git commit -am "update image tag" && git push origin master
+    - git commit -am "update image tag" && git push origin $BRANCH
 
 # sonarqube-check:
 #   image:
