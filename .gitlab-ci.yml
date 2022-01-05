@@ -28,6 +28,8 @@ before_script:
 #   - docker image prune -af
 
 build_image:
+  only:
+    - develop
   stage: build
   script:
     # Docker Build && Push image
@@ -79,6 +81,8 @@ update_manifest:
 
 
 sonarqube-check:
+  only:
+    - develop
   stage: sonarqube
   image:
     name: sonarsource/sonar-scanner-cli:latest
