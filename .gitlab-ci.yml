@@ -1,27 +1,89 @@
-image: google/cloud-sdk:alpine
+image: docker:19.03.12
 
-build_develop:
+stages:
+  - sonarqube
+  - build
+  - deploy
+
+services:
+  - docker:19.03.13-dind
+
+variables:
+  DOCKER_HOST: tcp://docker:2376
+  APP_NAME: dev-frontend
+  CI_REGISTRY_IMAGE: $APP_NAME
+  CD_CHART_REPO: infrastructure
+  CD_GIT_REPOSITORY: git@gitlab.foodash.xyz:foodash/$CD_CHART_REPO.git
+  CD_MANIFEST_FILE: Chart.yaml
+  TAG: $CI_COMMIT_SHORT_SHA
+  BRANCH: develop
+
+before_script:
+  - docker info
+  - echo $CI_REGISTRY_IMAGE:$TAG $PWD
+  # login
+  - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY_URL
+
+# after_script:
+#   - docker image prune -af
+
+build_image:
+  only:
+    - develop
   stage: build
-  environment: Develop
-  only:
-  - develop
   script:
-    - gcloud auth activate-service-account --key-file $SERVICE_ACCOUNT
-     - chmod +x setup_env.sh
-    - ./setup_env.sh
-    - gcloud builds submit --tag gcr.io/$PROJECT_ID_DEV/dev-front --project=$PROJECT_ID_DEV .
+    # Docker Build && Push image
+    - cat Dockerfile
+    - sh setup_env.sh
+    - >
+      docker build
+      --tag $CI_REGISTRY_IMAGE:$TAG
+      . 
+    - docker tag $CI_REGISTRY_IMAGE:$TAG $CI_REGISTRY_URL/foodash/frontend/$CI_REGISTRY_IMAGE:$TAG
+    - docker push $CI_REGISTRY_URL/foodash/frontend/$CI_REGISTRY_IMAGE:$TAG
 
-deploy_develop:
-  stage: deploy
-  environment: Develop
+tag_latest_image:
   only:
-  - develop
+    - develop
+  stage: deploy
+  variables:
+    GIT_STRATEGY: none
   script:
-    - gcloud auth activate-service-account --key-file /tmp/gcloud-service-key.json
-    - gcloud app deploy --image-url=gcr.io/$PROJECT_ID_DEV/dev-front:latest -q
+    - docker pull $CI_REGISTRY_URL/foodash/frontend/$CI_REGISTRY_IMAGE:$TAG
+    - docker tag $CI_REGISTRY_URL/foodash/frontend/$CI_REGISTRY_IMAGE:$TAG $CI_REGISTRY_URL/foodash/frontend/$CI_REGISTRY_IMAGE:latest
+    - docker push $CI_REGISTRY_URL/foodash/frontend/$CI_REGISTRY_IMAGE:latest
+
+update_manifest:
+  only: 
+   - develop
+  stage: deploy
+  variables:
+    GIT_STRATEGY: none
+  retry: 2
+  script:
+    # Add SSH key to root
+    - mkdir -p /root/.ssh
+    - cp $SSH_CONFIG /root/.ssh/config 
+    - echo "$SSH_PRIVATE_KEY" > /root/.ssh/id_rsa
+    - chmod 600 /root/.ssh/id_rsa
+    # Git
+    - apk add --no-cache git
+    - git config --global user.name $APP_NAME
+    - git config --global user.email $APP_NAME"@gitlab.foodash.xyz"
+    - git clone --single-branch --branch $BRANCH $CD_GIT_REPOSITORY
+    - cd $CD_CHART_REPO/Helms/frontend
+    # Helm
+    - >
+      docker run --rm -v ${PWD}:/workdir mikefarah/yq:3.2.1 yq write 
+      --inplace --verbose $CD_MANIFEST_FILE appVersion $TAG
+    - cat $CD_MANIFEST_FILE
+    - git commit -am "update image tag" && git push origin $BRANCH
 
 
 sonarqube-check:
+  only:
+    - develop
+  stage: sonarqube
   image:
     name: sonarsource/sonar-scanner-cli:latest
     entrypoint: ['']
@@ -35,5 +97,7 @@ sonarqube-check:
   script:
     - sonar-scanner
   allow_failure: true
-  only:
-    - merge_requests
+  before_script:
+    - []
+  # only:
+  #   - merge_requests

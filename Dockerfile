@@ -1,12 +1,20 @@
-FROM node:16
+### BUILD
+FROM node:lts-bullseye AS build-env
 
-# Copy everything to app
+WORKDIR /tmpdir
 
-COPY ./ App/
-
-WORKDIR /App
+COPY . .
 
 RUN npm install
+
 RUN npm run build
 
-ENTRYPOINT [ "npm", "run", "dev"] 
+#### LIVE
+FROM nginx:latest
+
+EXPOSE 8080
+
+
+COPY --from=build-env /tmpdir/dist /usr/share/nginx/html
+CMD ["nginx", "-g", "daemon off;"]
+
