@@ -1,13 +1,15 @@
 ### BUILD
-FROM node:lts-bullseye AS build-env
+FROM node:16.13-bullseye AS build-env
 
 WORKDIR /tmpdir
 
 COPY . .
 
-RUN npm install
+RUN npm install -g yarn
 
-RUN npm run build
+RUN yarn install
+
+RUN yarn build
 
 #### LIVE
 FROM nginx:latest
