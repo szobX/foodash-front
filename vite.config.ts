@@ -26,7 +26,7 @@ export default defineConfig({
       imports: ['vue', 'vue-router', 'vue-i18n', '@vueuse/core'],
       dts: 'src/auto-imports.d.ts',
     }),
-    Pages(),
+    Pages({}),
     Layouts(),
     Icons(),
     html({
