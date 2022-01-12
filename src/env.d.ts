@@ -7,7 +7,8 @@ interface ImportMetaEnv {
   VITE_BACKEND_URL_API: string
   VITE_AUTH_PREFIX_APP: string
 }
-
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
+declare interface Window {}
 interface ImportMeta {
   readonly env: ImportMetaEnv
 }
