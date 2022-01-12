@@ -1,13 +1,11 @@
 <template>
   <main class="flex h-screen flex-col lg:flex-row">
-    <div
-      class="w-full lg:w-1/3 absolute lg:relative lg:bg-orange p-8 text-white"
-    >
-      <span class="text-orange lg:text-white font-bold text-5xl">FooDash</span>
+    <div class="w-full lg:w-1/3 lg:relative bg-background lg:bg-orange p-8">
+      <img class="w-full sm:w-72" src="@/assets/logo.png" lang="FooDash" />
     </div>
     <router-view />
     <div
-      class="absolute left-0 bottom-0 p-8 w-full lg:w-1/3 text-gray-400 lg:text-white"
+      class="lg:absolute left-0 bottom-0 p-8 w-full lg:w-1/3 text-white bg-orange"
     >
       <h4>Check the status</h4>
       <p class="text-xs my-3">

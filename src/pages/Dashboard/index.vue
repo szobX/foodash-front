@@ -12,7 +12,7 @@
           >
             <BasketIcon class="stroke-current text-orange w-12 h-12" />
           </div>
-          <div class="flex-shrink-0">
+          <div class="shrink-0">
             <span class="text-5xl leading-none font-bold text-orange-dark"
               >56</span
             >
@@ -46,7 +46,7 @@
           >
             <BasketIcon class="stroke-current text-orange w-12 h-12" />
           </div>
-          <div class="flex-shrink-0">
+          <div class="shrink-0">
             <span class="text-5xl leading-none font-bold text-orange-dark"
               >56</span
             >
@@ -80,7 +80,7 @@
           >
             <BasketIcon class="stroke-current text-orange w-12 h-12" />
           </div>
-          <div class="flex-shrink-0">
+          <div class="shrink-0">
             <span class="text-5xl leading-none font-bold text-orange-dark"
               >56</span
             >
@@ -114,7 +114,7 @@
           >
             <BasketIcon class="stroke-current text-orange w-12 h-12" />
           </div>
-          <div class="flex-shrink-0">
+          <div class="shrink-0">
             <span class="text-5xl leading-none font-bold text-orange-dark"
               >56</span
             >

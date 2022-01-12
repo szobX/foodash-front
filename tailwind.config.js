@@ -3,11 +3,16 @@ const colors = require('tailwindcss/colors')
 
 /** @type {import("@types/tailwindcss/tailwind-config").TailwindConfig } */
 module.exports = {
-  mode: 'jif',
   darkMode: 'class',
+  content: [
+    // Example content paths...
+    './public/**/*.html',
+    './src/**/*.{js,jsx,ts,tsx,vue}',
+  ],
   theme: {
     colors: {
       ...colors,
+      current: 'currentColor',
       orange: {
         ...colors.orange,
         lighten: '#f2f2ee',
@@ -25,6 +30,10 @@ module.exports = {
       },
       colors: {
         current: 'currentColor',
+        green: colors.emerald,
+        yellow: colors.amber,
+        purple: colors.violet,
+        gray: colors.neutral,
         valid: colors.green[500],
         error: colors.red[500],
         background: colors.gray['100'],
@@ -45,6 +54,9 @@ module.exports = {
       },
     },
   },
+  // corePlugins: {
+  //   preflight: false,
+  // },
   plugins: [
     require('@tailwindcss/forms')({
       strategy: 'class',

@@ -3,9 +3,9 @@
     class="static w-64 bg-white shadow-lg h-screen z-20 overflow-y-auto inset-0"
   >
     <div class="px-4 py-2 text-center">
-      <img src="@/assets/logo.png" lang="FooDash" />
+      <img class="w-full" src="@/assets/logo.png" lang="FooDash" />
     </div>
-    <ul>
+    <ul class="p-0 m-0 list-none">
       <MenuItem v-for="item in mockMenuItems" :key="item.id" :item="item" />
     </ul>
   </div>
