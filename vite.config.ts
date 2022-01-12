@@ -10,6 +10,7 @@ import Layouts from 'vite-plugin-vue-layouts'
 import Icons from 'unplugin-icons/vite'
 // import IconsResolver from 'unplugin-icons/resolver'
 // import eslintPlugin from 'vite-plugin-eslint'
+import html from 'vite-plugin-html'
 
 export default defineConfig({
   plugins: [
@@ -28,6 +29,14 @@ export default defineConfig({
     Pages(),
     Layouts(),
     Icons(),
+    html({
+      inject: {
+        data: {
+          injectScript: '<script src="./newrelic.js"></script>',
+        },
+      },
+      minify: true,
+    }),
   ],
   resolve: {
     alias: {
